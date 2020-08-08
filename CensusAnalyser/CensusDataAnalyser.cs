@@ -6,48 +6,33 @@ namespace CensusAnalyser
 {
     public class CensusDataAnalyser
     {
-        public int loadIndiaCensusData(string CSV_FILE_PATH)
+        public int ReadCsvFile(string CSV_FILE_PATH)
         {
-            string[] data;
-
-            if (!CSV_FILE_PATH.Contains(".csv"))
-                throw new CensusDataAnalyserException("File Type Error", CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE);
-
+            string[] csvFileData;
+            
             try
             {
-                data = File.ReadAllLines(CSV_FILE_PATH);
-                if (!data[0].Contains("State,Population,AreaInSqKm,DensityPerSqKm"))
-                    throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
+                csvFileData = File.ReadAllLines(CSV_FILE_PATH);
+                if (!csvFileData[0].Contains("State,Population,AreaInSqKm,DensityPerSqKm") && CSV_FILE_PATH.Contains("IndiaStateCensus"))
+                    headerException();
+                if(!csvFileData[0].Contains("SrNo,State Name,TIN,StateCode") && CSV_FILE_PATH.Contains("IndiaStateCode"))
+                    headerException();
             }
             catch (FileNotFoundException fnfe)
             {
                 throw new CensusDataAnalyserException("File Not Found", CensusDataAnalyserException.ExceptionType.FILE_NOT_FOUND);
             }
-
-            return data.Length - 1;
-
-        }
-
-        public int loadIndiaStateCode(string CSV_FILE_PATH)
-        {
-            string[] data;
-
-            if (!CSV_FILE_PATH.Contains(".csv"))
-                throw new CensusDataAnalyserException("File Type Error", CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE);
-
-            try
+            catch (ArgumentException ae)
             {
-                data = File.ReadAllLines(CSV_FILE_PATH);
-                if (!data[0].Contains("SrNo,State Name,TIN,StateCode"))
-                    throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
-            }
-            catch (FileNotFoundException fnfe)
-            {
-                throw new CensusDataAnalyserException("File Not Found", CensusDataAnalyserException.ExceptionType.FILE_NOT_FOUND);
+                throw new CensusDataAnalyserException("Invalid Argument", CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT);
             }
 
-            return data.Length - 1;
+            void headerException()
+            {
+                throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
+            }
 
+            return csvFileData.Length - 1;
         }
-    }
+   }
 }

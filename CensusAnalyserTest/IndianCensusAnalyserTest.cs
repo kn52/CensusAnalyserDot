@@ -23,7 +23,7 @@ namespace Tests
         [Test]
         public void givenCSVFilePath_WhenCorrect_willReturnTotalCount()
         {
-            int length = censusDataAnalyser.loadIndiaCensusData(INDIA_CENSUS_FILE_PATH);
+            int length = censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_FILE_PATH);
             Assert.AreEqual(29, length);
         }
 
@@ -31,7 +31,7 @@ namespace Tests
         public void givenCSVFilePath_WhenIncorrect_willthrowException()
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
-                () => censusDataAnalyser.loadIndiaCensusData(INDIA_CENSUS_FILE_WRONG_PATH));
+                () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_FILE_WRONG_PATH));
             Assert.AreEqual("File Not Found", ex.Message);
         }
 
@@ -39,8 +39,8 @@ namespace Tests
         public void givenCSVFileType_WhenIncorrect_willthrowException()
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
-                () => censusDataAnalyser.loadIndiaCensusData(INDIA_CENSUS_WRONG_TYPE_FILE_PATH));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE, ex.exceptionType);
+                () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_WRONG_TYPE_FILE_PATH));
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.FILE_NOT_FOUND, ex.exceptionType);
         }
 
 
@@ -48,7 +48,7 @@ namespace Tests
         public void givenCSVFileHeader_WhenIncorrect_willthrowException()
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
-                () => censusDataAnalyser.loadIndiaCensusData(INDIA_CENSUS_WRONG_HEADER_FILE_PATH));
+                () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_WRONG_HEADER_FILE_PATH));
             Assert.AreEqual(CensusDataAnalyserException.ExceptionType.WRONG_HEADER, ex.exceptionType);
         }
 
@@ -56,8 +56,8 @@ namespace Tests
         public void givenCSVFilePath_IsEmpty_willthrowException()
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
-                () => censusDataAnalyser.loadIndiaCensusData(""));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE, ex.exceptionType);
+                () => censusDataAnalyser.ReadCsvFile(""));
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT, ex.exceptionType);
         }
     }
 }

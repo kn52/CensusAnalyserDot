@@ -6,8 +6,9 @@ namespace CensusAnalyser.exception
     {
         public enum ExceptionType
         {
-            FILE_NOT_FOUND, INVALID_FILE_TYPE, WRONG_HEADER
+            INVALID_ARGUMENT,  FILE_NOT_FOUND, WRONG_HEADER
         }
+
         public ExceptionType exceptionType;
         public CensusDataAnalyserException(string message, ExceptionType exceptionType) : base(String.Format(message))
         {
