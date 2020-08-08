@@ -1,6 +1,6 @@
 ﻿namespace CensusAnalyser
 {
-    public class IndianCesusCSV
+    public class IndianCensusCSV
     {
         public string state;
         public long Population;
