@@ -8,6 +8,6 @@ namespace CensusAnalyser
 {
     interface ICsvHelper
     {
-        int readFile(string filePath);
+        dynamic readFile(string filePath);
     }
 }

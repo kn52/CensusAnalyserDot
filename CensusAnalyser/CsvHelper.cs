@@ -1,29 +1,21 @@
 ﻿using CensusAnalyser.exception;
+using CsvHelper;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace CensusAnalyser
 {
     public class CsvHelper : ICsvHelper
     {
-        static void headerException()
+        public dynamic readFile(string filePath)
         {
-            throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
-        }
-
-        public int readFile(string filePath)
-        {
-            string[] csvData=null;
+            CsvReader csvData;
             try
             {
-                csvData = File.ReadAllLines(filePath);
-                if (!csvData[0].Contains("State,Population,AreaInSqKm,DensityPerSqKm") && filePath.Contains("IndiaStateCensus"))
-                    headerException();
-                if (!csvData[0].Contains("SrNo,State Name,TIN,StateCode") && filePath.Contains("IndiaStateCode"))
-                    headerException();
-
+                StreamReader reader = File.OpenText(filePath);
+                csvData = new CsvReader(reader,System.Globalization.CultureInfo.CurrentCulture);
+                csvData.Configuration.HasHeaderRecord = true;
+                csvData.Configuration.Delimiter=",";
             }
             catch (FileNotFoundException fnfe)
             {
@@ -33,7 +25,7 @@ namespace CensusAnalyser
             {
                 throw new CensusDataAnalyserException("Invalid Argument", CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT);
             }
-            return csvData.Length-1;
+            return csvData;
         }
         
     }

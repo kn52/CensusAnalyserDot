@@ -14,6 +14,7 @@ namespace CensusAnalyser.pojo
         public int pin { get; set; }
 
         [Name("StateCode")]
-        public string stateCode { get; set; } 
+        public string stateCode { get; set; }
+        
     }
 }
