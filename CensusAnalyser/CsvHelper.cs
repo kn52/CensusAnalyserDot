@@ -13,9 +13,7 @@ namespace CensusAnalyser
             try
             {
                 StreamReader reader = File.OpenText(filePath);
-                csvData = new CsvReader(reader,System.Globalization.CultureInfo.CurrentCulture);
-                csvData.Configuration.HasHeaderRecord = true;
-                csvData.Configuration.Delimiter=",";
+                csvData = new CsvReader(reader,System.Globalization.CultureInfo.CurrentCulture);                
             }
             catch (FileNotFoundException fnfe)
             {

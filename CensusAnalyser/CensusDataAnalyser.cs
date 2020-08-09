@@ -9,23 +9,17 @@ namespace CensusAnalyser
         public int readCsvFile(string CSV_FILE_PATH)
         {
             int numOfRecords = 0;
-            ICsvHelper csvHelper = new CsvHelper();
-            CsvReader data = csvHelper.readFile(CSV_FILE_PATH);
-            while (data.Read())
-            {
-                if (!data.Context.Record[0].Contains("State") && CSV_FILE_PATH.Contains("IndiaStateCensusWrongHeader"))
-                    headerException();
-                if (!data.Context.Record[0].Contains("SrNo") && CSV_FILE_PATH.Contains("IndiaStateCodeWrongHeader"))
-                    headerException();
-                numOfRecords++;
-            }
-            return --numOfRecords;
+            var data;
+            IndiaCensus cen = new IndiaCensus();
+            if (CSV_FILE_PATH.Contains("IndiaStateCensus")) 
+                 data = cen.readIndiaStateCensusFile(CSV_FILE_PATH);
+            if (CSV_FILE_PATH.Contains("IndiaStateCode"))
+                data = cen.readIndiaStateCodeFile(CSV_FILE_PATH);
+            //while (data.Read())
+            //{
+            //    numOfRecords++;
+            //}
+            return data.Length;
         }
-
-        static void headerException()
-        {
-            throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
-        }
-
     }
 }
