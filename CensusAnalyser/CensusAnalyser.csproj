@@ -56,6 +56,7 @@
     <Compile Include="CensusDataAnalyser.cs" />
     <Compile Include="CsvHelper.cs" />
     <Compile Include="exception\CensusDataAnalyserException.cs" />
+    <Compile Include="ICsvHelper.cs" />
     <Compile Include="pojo\IndiaStateCensusCsv.cs" />
     <Compile Include="pojo\IndiaStateCodeCsv.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,12 +6,13 @@ using System.Linq;
 
 namespace CensusAnalyser
 {
-    public class CsvHelper
+    public class CsvHelper : ICsvHelper
     {
         static void headerException()
         {
             throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
         }
+
         public int readFile(string filePath)
         {
             string[] csvData=null;

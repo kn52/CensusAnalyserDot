@@ -8,8 +8,8 @@ namespace CensusAnalyser
     {
         public int readCsvFile(string CSV_FILE_PATH)
         {
-            CsvHelper csvHelper = new CsvHelper();
-            int numOfRecords = csvHelper.readFile(CSV_FILE_PATH);
+            ICsvHelper csvHelper = new CsvHelper();
+            int numOfRecords = csvHelper..readFile(CSV_FILE_PATH);
             return numOfRecords;
         }
     }
