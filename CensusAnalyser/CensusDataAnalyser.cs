@@ -1,7 +1,10 @@
 ﻿using CensusAnalyser.comparator;
 using CensusAnalyser.exception;
 using CensusAnalyser.factory;
+using CensusAnalyser.pojo;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CensusAnalyser
 {
@@ -32,18 +35,20 @@ namespace CensusAnalyser
 
         public string GetIndiaStateCensusSortedByName(string CSV_FILE_PATH)
         {
-            var csvData = ReadCsvFile(CSV_FILE_PATH);
+            Dictionary<string, IndiaStateCensusCsv> csvData = ReadCsvFile(CSV_FILE_PATH);
             IndiaStateCensusComparator censusComparator = new IndiaStateCensusComparator();
-            csvData.Sort(censusComparator);
-            return JsonConvert.SerializeObject(csvData);
+            var data = csvData.Select(x => x.Value).ToList();
+            data.Sort(censusComparator);
+            return JsonConvert.SerializeObject(data);
         }
 
         public string GetIndiaStateCodeSortedByName(string CSV_FILE_PATH)
         {
-            var csvData = ReadCsvFile(CSV_FILE_PATH);
+            Dictionary<string, IndiaStateCodeCsv> csvData = ReadCsvFile(CSV_FILE_PATH);
             IndiaStateCodeComparator censusComparator = new IndiaStateCodeComparator();
-            csvData.Sort(censusComparator);
-            return JsonConvert.SerializeObject(csvData);
+            var data = csvData.Select(x => x.Value).ToList();
+            data.Sort(censusComparator);
+            return JsonConvert.SerializeObject(data);
         }
     }
 }

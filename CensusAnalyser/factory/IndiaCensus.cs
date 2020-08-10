@@ -8,32 +8,32 @@ namespace CensusAnalyser.factory
 {
     class IndiaCensus
     {
-        public List<IndiaStateCensusCsv> ReadIndiaStateCensusFile(string filePath)
+        public Dictionary<string,IndiaStateCensusCsv> ReadIndiaStateCensusFile(string filePath)
         {
-            List<IndiaStateCensusCsv> censusList = new List<IndiaStateCensusCsv>();
+            Dictionary<string, IndiaStateCensusCsv> stateCensusList = new Dictionary<string,IndiaStateCensusCsv>();
             CsvReader csv = ReadIndiaFile(filePath);
             while (csv.Read())
             {
                 if (!csv.Context.Record[0].Contains("State") && filePath.Contains("IndiaStateCensusWrongHeader"))
                     HeaderException();
                 var record = csv.GetRecord<IndiaStateCensusCsv>();
-                censusList.Add(record);
+                stateCensusList.Add(record.state,record);
             }
-            return censusList;
+            return stateCensusList;
         }
 
-        public List<IndiaStateCodeCsv> ReadIndiaStateCodeFile(string filePath)
+        public Dictionary<string,IndiaStateCodeCsv> ReadIndiaStateCodeFile(string filePath)
         {
-            List<IndiaStateCodeCsv> stateCode = new List<IndiaStateCodeCsv>();
+            Dictionary<string, IndiaStateCodeCsv> stateCodeList = new Dictionary<string, IndiaStateCodeCsv>();
             CsvReader csv = ReadIndiaFile(filePath);
             while (csv.Read())
             {
                 if (!csv.Context.Record[0].Contains("SrNo") && filePath.Contains("IndiaStateCodeWrongHeader"))
                     HeaderException();
                 var record = csv.GetRecord<IndiaStateCodeCsv>();
-                stateCode.Add(record);
+                stateCodeList.Add(record.state,record);
             }
-            return stateCode;
+            return stateCodeList;
         }
 
         private CsvReader ReadIndiaFile(string filePath)
