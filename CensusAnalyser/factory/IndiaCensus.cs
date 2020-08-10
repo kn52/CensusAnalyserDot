@@ -1,47 +1,48 @@
-﻿using CensusAnalyser.exception;
+﻿using CensusAnalyser.builder;
+using CensusAnalyser.exception;
 using CensusAnalyser.pojo;
 using CsvHelper;
 using System.Collections.Generic;
 
-namespace CensusAnalyser
+namespace CensusAnalyser.factory
 {
     class IndiaCensus
     {
-        public List<IndiaStateCensusCsv> readIndiaStateCensusFile(string filePath)
+        public List<IndiaStateCensusCsv> ReadIndiaStateCensusFile(string filePath)
         {
             List<IndiaStateCensusCsv> censusList = new List<IndiaStateCensusCsv>();
-            CsvReader csv = readIndiaFile(filePath);
+            CsvReader csv = ReadIndiaFile(filePath);
             while (csv.Read())
             {
                 if (!csv.Context.Record[0].Contains("State") && filePath.Contains("IndiaStateCensusWrongHeader"))
-                    headerException();
+                    HeaderException();
                 var record = csv.GetRecord<IndiaStateCensusCsv>();
                 censusList.Add(record);
             }
             return censusList;
         }
 
-        public List<IndiaStateCodeCsv> readIndiaStateCodeFile(string filePath)
+        public List<IndiaStateCodeCsv> ReadIndiaStateCodeFile(string filePath)
         {
             List<IndiaStateCodeCsv> stateCode = new List<IndiaStateCodeCsv>();
-            CsvReader csv = readIndiaFile(filePath);
+            CsvReader csv = ReadIndiaFile(filePath);
             while (csv.Read())
             {
                 if (!csv.Context.Record[0].Contains("SrNo") && filePath.Contains("IndiaStateCodeWrongHeader"))
-                    headerException();
+                    HeaderException();
                 var record = csv.GetRecord<IndiaStateCodeCsv>();
                 stateCode.Add(record);
             }
             return stateCode;
         }
 
-        private CsvReader readIndiaFile(string filePath)
+        private CsvReader ReadIndiaFile(string filePath)
         {
-            ICsvHelper csvHelper = new CsvHelper();
-            CsvReader csvFile = csvHelper.readFile(filePath);
+            ICsvHelper csvHelper = new CsvBuilder();
+            CsvReader csvFile = csvHelper.ReadFile(filePath);
             return csvFile;
         }
-        static void headerException()
+        static void HeaderException()
         {
             throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
         }

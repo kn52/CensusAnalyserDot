@@ -2,19 +2,18 @@
 using CsvHelper;
 using System.IO;
 
-namespace CensusAnalyser
+namespace CensusAnalyser.builder
 {
-    public class CsvHelper : ICsvHelper
+    public class CsvBuilder : ICsvHelper
     {
-        public dynamic readFile(string filePath)
+        public dynamic ReadFile(string filePath)
         {
             CsvReader csvData;
             try
             {
                 StreamReader reader = File.OpenText(filePath);
                 csvData = new CsvReader(reader,System.Globalization.CultureInfo.CurrentCulture);
-                csvData.Configuration.Delimiter = ",";
-                
+                csvData.Configuration.Delimiter = ",";                
             }
             catch (FileNotFoundException fnfe)
             {

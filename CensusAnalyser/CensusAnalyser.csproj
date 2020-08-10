@@ -59,11 +59,11 @@
   <ItemGroup>
     <Compile Include="comparator\IndiaStateCensusComparator.cs" />
     <Compile Include="CensusDataAnalyser.cs" />
-    <Compile Include="CsvHelper.cs" />
-    <Compile Include="CsvHelperFactory.cs" />
+    <Compile Include="builder\CsvBuilder.cs" />
+    <Compile Include="factory\CsvHelperFactory.cs" />
     <Compile Include="exception\CensusDataAnalyserException.cs" />
-    <Compile Include="ICsvHelper.cs" />
-    <Compile Include="IndiaCensus.cs" />
+    <Compile Include="builder\ICsvHelper.cs" />
+    <Compile Include="factory\IndiaCensus.cs" />
     <Compile Include="comparator\IndiaStateCodeComparator.cs" />
     <Compile Include="pojo\IndiaStateCensusCsv.cs" />
     <Compile Include="pojo\IndiaStateCodeCsv.cs" />

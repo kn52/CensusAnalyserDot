@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CensusAnalyser
+namespace CensusAnalyser.factory
 {
     class CsvHelperFactory
     {
-        public static dynamic getCsvHelper(string CSV_FILE_PATH)
+        public static dynamic GetCsvHelper(string CSV_FILE_PATH)
         {
             if (CSV_FILE_PATH.Contains("IndiaStateCode"))
-                return new IndiaCensus().readIndiaStateCodeFile(CSV_FILE_PATH);
+                return new IndiaCensus().ReadIndiaStateCodeFile(CSV_FILE_PATH);
             if (CSV_FILE_PATH.Contains("IndiaStateCensus"))
-                return new IndiaCensus().readIndiaStateCensusFile(CSV_FILE_PATH);
+                return new IndiaCensus().ReadIndiaStateCensusFile(CSV_FILE_PATH);
             
             throw new CensusDataAnalyserException("Invalid Argument", CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT);
         }
