@@ -24,16 +24,16 @@ namespace CensusAnalyser
 
         public List<IndiaStateCodeCsv> readIndiaStateCodeFile(string filePath)
         {
-            List<IndiaStateCodeCsv> censusList = new List<IndiaStateCodeCsv>();
+            List<IndiaStateCodeCsv> stateCode = new List<IndiaStateCodeCsv>();
             CsvReader csv = readIndiaFile(filePath);
             while (csv.Read())
             {
                 if (!csv.Context.Record[0].Contains("SrNo") && filePath.Contains("IndiaStateCodeWrongHeader"))
                     headerException();
                 var record = csv.GetRecord<IndiaStateCodeCsv>();
-                censusList.Add(record);
+                stateCode.Add(record);
             }
-            return censusList;
+            return stateCode;
         }
 
         private CsvReader readIndiaFile(string filePath)

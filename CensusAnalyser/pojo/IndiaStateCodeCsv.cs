@@ -2,7 +2,7 @@
 
 namespace CensusAnalyser.pojo
 {
-    class IndiaStateCodeCsv
+    public class IndiaStateCodeCsv
     {
         [Name("SrNo")]
         public int srNo { get; set; }

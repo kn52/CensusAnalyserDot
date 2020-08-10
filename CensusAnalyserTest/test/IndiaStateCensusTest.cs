@@ -1,10 +1,11 @@
 ﻿using NUnit.Framework;
 using CensusAnalyser;
 using CensusAnalyser.exception;
-
+using CensusAnalyser.pojo;
+using Newtonsoft.Json;
 namespace CensusAnalyserTest
 {
-    class IndiaCensusTest
+    class IndiaStateCensusTest
     {
         static string testPath = "D:\\AAA\\VisualStudio\\CensusAnalyserSln\\CensusAnalyserTest\\";
         private readonly string INDIA_CENSUS_FILE_PATH = testPath + "csvfiles\\IndiaStateCensusData.csv";
@@ -23,8 +24,8 @@ namespace CensusAnalyserTest
         [Test]
         public void givenCSVFilePath_WhenCorrect_willReturnTotalCount()
         {
-            int length = censusDataAnalyser.readCsvFile(INDIA_CENSUS_FILE_PATH);
-            Assert.AreEqual(29, length);
+            int count = censusDataAnalyser.getFileRecordCount(INDIA_CENSUS_FILE_PATH);
+            Assert.AreEqual(29, count);
         }
 
         [Test]
@@ -58,6 +59,14 @@ namespace CensusAnalyserTest
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.readCsvFile(""));
             Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT, ex.exceptionType);
+        }
+
+        [Test]
+        public void givenCsvFilePath_WhenSortedOnName_ShouldReturnJson()
+        {
+            string json = censusDataAnalyser.getIndiaStateCensusSortedByName(INDIA_CENSUS_FILE_PATH);
+            IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
+            Assert.AreEqual("Andhra Pradesh", indiaStateCensusCsv[0].state);
         }
     }
 }

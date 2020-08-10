@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using CensusAnalyser;
+using CensusAnalyser.pojo;
 using CensusAnalyser.exception;
+using Newtonsoft.Json;
 
 namespace CensusAnalyserTest
 {
@@ -23,8 +25,8 @@ namespace CensusAnalyserTest
         [Test]
         public void givenCSVFilePath_WhenCorrect_willReturnTotalCount()
         {
-            int length = censusDataAnalyser.readCsvFile(INDIA_STATECODE_FILE_PATH);
-            Assert.AreEqual(37, length);
+            int count = censusDataAnalyser.getFileRecordCount(INDIA_STATECODE_FILE_PATH);
+            Assert.AreEqual(37, count);
         }
 
         [Test]
