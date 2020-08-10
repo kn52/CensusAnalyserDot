@@ -61,5 +61,14 @@ namespace CensusAnalyserTest
                 () => censusDataAnalyser.readCsvFile(""));
             Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT, ex.exceptionType);
         }
+
+        [Test]
+        public void givenCsvFilePath_WhenSortedOnName_ShouldReturnJson()
+        {
+            string json = censusDataAnalyser.getIndiaStateCodeSortedByName(INDIA_STATECODE_FILE_PATH);
+            IndiaStateCodeCsv[] indiaStateCodeCsv = JsonConvert.DeserializeObject<IndiaStateCodeCsv[]>(json);
+            Assert.AreEqual("Andaman and Nicobar Islands", indiaStateCodeCsv[0].state);
+        }
     }
+    
 }

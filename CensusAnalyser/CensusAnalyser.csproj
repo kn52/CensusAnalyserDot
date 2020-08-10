@@ -57,14 +57,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IndiaStateCensusComparator.cs" />
+    <Compile Include="comparator\IndiaStateCensusComparator.cs" />
     <Compile Include="CensusDataAnalyser.cs" />
     <Compile Include="CsvHelper.cs" />
     <Compile Include="CsvHelperFactory.cs" />
     <Compile Include="exception\CensusDataAnalyserException.cs" />
     <Compile Include="ICsvHelper.cs" />
     <Compile Include="IndiaCensus.cs" />
-    <Compile Include="IndiaStateCodeComparator.cs" />
+    <Compile Include="comparator\IndiaStateCodeComparator.cs" />
     <Compile Include="pojo\IndiaStateCensusCsv.cs" />
     <Compile Include="pojo\IndiaStateCodeCsv.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

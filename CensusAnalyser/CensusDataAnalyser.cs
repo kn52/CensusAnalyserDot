@@ -1,5 +1,5 @@
-﻿using CensusAnalyser.exception;
-using CsvHelper;
+﻿using CensusAnalyser.comparator;
+using CensusAnalyser.exception;
 using Newtonsoft.Json;
 
 namespace CensusAnalyser

@@ -1,6 +1,5 @@
 ﻿using CensusAnalyser.exception;
 using CsvHelper;
-using System;
 using System.IO;
 
 namespace CensusAnalyser

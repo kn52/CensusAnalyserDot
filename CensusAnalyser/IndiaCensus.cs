@@ -1,7 +1,6 @@
 ﻿using CensusAnalyser.exception;
 using CensusAnalyser.pojo;
 using CsvHelper;
-using System;
 using System.Collections.Generic;
 
 namespace CensusAnalyser
