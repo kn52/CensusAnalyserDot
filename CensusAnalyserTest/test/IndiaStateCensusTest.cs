@@ -22,14 +22,14 @@ namespace CensusAnalyserTest
         }
 
         [Test]
-        public void givenCSVFilePath_WhenCorrect_willReturnTotalCount()
+        public void GivenCSVFilePath_WhenCorrect_willReturnTotalCount()
         {
             int count = censusDataAnalyser.GetFileRecordCount(INDIA_CENSUS_FILE_PATH);
             Assert.AreEqual(29, count);
         }
 
         [Test]
-        public void givenCSVFilePath_WhenIncorrect_willthrowException()
+        public void GivenCSVFilePath_WhenIncorrect_willthrowException()
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_FILE_WRONG_PATH));
@@ -37,7 +37,7 @@ namespace CensusAnalyserTest
         }
 
         [Test]
-        public void givenCSVFileType_WhenIncorrect_willthrowException()
+        public void GivenCSVFileType_WhenIncorrect_willthrowException()
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_WRONG_TYPE_FILE_PATH));
@@ -46,7 +46,7 @@ namespace CensusAnalyserTest
 
 
         [Test]
-        public void givenCSVFileHeader_WhenIncorrect_willthrowException()
+        public void GivenCSVFileHeader_WhenIncorrect_willthrowException()
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_WRONG_HEADER_FILE_PATH));
@@ -54,7 +54,7 @@ namespace CensusAnalyserTest
         }
 
         [Test]
-        public void givenCSVFilePath_IsEmpty_willthrowException()
+        public void GivenCSVFilePath_IsEmpty_willthrowException()
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(""));
@@ -62,12 +62,19 @@ namespace CensusAnalyserTest
         }
 
         [Test]
-        public void givenCsvFilePath_WhenSortedOnName_ShouldReturnJson()
+        public void GivenCsvFilePath_WhenSortedOnName_ShouldReturnJson_AndCheckingFirstIndex()
         {
             string json = censusDataAnalyser.GetIndiaStateCensusSortedByName(INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
             Assert.AreEqual("Andhra Pradesh", indiaStateCensusCsv[0].state);
-            Assert.AreEqual("West Bengal", indiaStateCensusCsv[indiaStateCensusCsv.Length-1].state);
+        }
+
+        [Test]
+        public void GivenCsvFilePath_WhenSortedOnName_ShouldReturnJson_AndCheckingLastIndex()
+        {
+            string json = censusDataAnalyser.GetIndiaStateCensusSortedByName(INDIA_CENSUS_FILE_PATH);
+            IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
+            Assert.AreEqual("West Bengal", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
         }
     }
 }
