@@ -17,16 +17,10 @@ namespace CensusAnalyser
 
         public CensusAnalyserDAO(IndiaStateCensusCsv indiaStateCensusCsv)
         {
-            this.state = indiaStateCensusCsv.state;
-            this.population = indiaStateCensusCsv.population;
-            this.totalArea = indiaStateCensusCsv.areaInSqKm;
-            this.totalDensity = indiaStateCensusCsv.densityPerSqKm;
-        }
-
-        public CensusAnalyserDAO(IndiaStateCodeCsv indiaStateCodeCsv)
-        {
-            this.state = indiaStateCodeCsv.state;
-            this.stateCode = indiaStateCodeCsv.stateCode;
+            state = indiaStateCensusCsv.state;
+            population = indiaStateCensusCsv.population;
+            totalArea = indiaStateCensusCsv.areaInSqKm;
+            totalDensity = indiaStateCensusCsv.densityPerSqKm;
         }
     }
 }

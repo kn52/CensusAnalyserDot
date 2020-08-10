@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CensusAnalyser.comparator
 {
-    class CensusAnalyserCompartor : Comparer<CensusAnalyserDAO>
+    public class CensusAnalyserCompartor : Comparer<CensusAnalyserDAO>
     {
         public override int Compare(CensusAnalyserDAO x, CensusAnalyserDAO y)
         {
