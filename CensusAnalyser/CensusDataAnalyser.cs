@@ -25,16 +25,7 @@ namespace CensusAnalyser
             return numOfRecords.Count;
         }
 
-        public string GetIndiaStateCensusSortedByName(string CSV_FILE_PATH)
-        {
-            Dictionary<string, CensusAnalyserDAO> csvData = ReadCsvFile(CSV_FILE_PATH);
-            CensusAnalyserCompartor censusComparator = new CensusAnalyserCompartor();
-            var data = csvData.Select(x => x.Value).ToList();
-            data.Sort(censusComparator);
-            return JsonConvert.SerializeObject(data);
-        }
-
-        public string GetIndiaStateCodeSortedByName(string CSV_FILE_PATH)
+        public string GetIndiaStateSortedByName(string CSV_FILE_PATH)
         {
             Dictionary<string, CensusAnalyserDAO> csvData = ReadCsvFile(CSV_FILE_PATH);
             CensusAnalyserCompartor censusComparator = new CensusAnalyserCompartor();

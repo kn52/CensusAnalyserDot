@@ -64,7 +64,7 @@ namespace CensusAnalyserTest
         [Test]
         public void GivenCsvFilePath_WhenSortedOnName_ShouldReturnJson_AndCheckingFirstIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateCensusSortedByName(INDIA_CENSUS_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByName(INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
             Assert.AreEqual("Andhra Pradesh", indiaStateCensusCsv[0].state);
         }
@@ -72,7 +72,7 @@ namespace CensusAnalyserTest
         [Test]
         public void GivenCsvFilePath_WhenSortedOnName_ShouldReturnJson_AndCheckingLastIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateCensusSortedByName(INDIA_CENSUS_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByName(INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
             Assert.AreEqual("West Bengal", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
         }
