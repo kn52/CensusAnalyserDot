@@ -8,11 +8,11 @@ namespace CensusAnalyser.pojo
         public string state { get; set; }
 
         [Name("Population")]
-        public string population { get; set; }
+        public double population { get; set; }
 
         [Name("AreaInSqKm")]
         public double areaInSqKm { get; set; }
-
+        
         [Name("DensityPerSqKm")]
         public double densityPerSqKm { get; set; }
     }

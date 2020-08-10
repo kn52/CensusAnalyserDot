@@ -25,18 +25,10 @@ namespace CensusAnalyser
             return numOfRecords.Count;
         }
 
-        public string GetIndiaCensusSortedByName(string CSV_FILE_PATH)
-        {
-            var csvData = ReadCsvFile(CSV_FILE_PATH);
-            IndiaStateCensusComparator censusComparator = new IndiaStateCensusComparator();
-            csvData.Sort(censusComparator);
-            return JsonConvert.SerializeObject(csvData);
-        }
-
         public string GetIndiaStateCensusSortedByName(string CSV_FILE_PATH)
         {
-            Dictionary<string, IndiaStateCensusCsv> csvData = ReadCsvFile(CSV_FILE_PATH);
-            IndiaStateCensusComparator censusComparator = new IndiaStateCensusComparator();
+            Dictionary<string, CensusAnalyserDAO> csvData = ReadCsvFile(CSV_FILE_PATH);
+            CensusAnalyserCompartor censusComparator = new CensusAnalyserCompartor();
             var data = csvData.Select(x => x.Value).ToList();
             data.Sort(censusComparator);
             return JsonConvert.SerializeObject(data);
@@ -44,8 +36,8 @@ namespace CensusAnalyser
 
         public string GetIndiaStateCodeSortedByName(string CSV_FILE_PATH)
         {
-            Dictionary<string, IndiaStateCodeCsv> csvData = ReadCsvFile(CSV_FILE_PATH);
-            IndiaStateCodeComparator censusComparator = new IndiaStateCodeComparator();
+            Dictionary<string, CensusAnalyserDAO> csvData = ReadCsvFile(CSV_FILE_PATH);
+            CensusAnalyserCompartor censusComparator = new CensusAnalyserCompartor();
             var data = csvData.Select(x => x.Value).ToList();
             data.Sort(censusComparator);
             return JsonConvert.SerializeObject(data);
