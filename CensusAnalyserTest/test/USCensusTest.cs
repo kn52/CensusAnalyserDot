@@ -55,6 +55,14 @@ namespace CensusAnalyserTest.test
         }
 
         [Test]
+        public void GivenCSVFilePath_IsEmpty_willthrowException()
+        {
+            var ex = Assert.Throws<CensusDataAnalyserException>(
+                () => censusDataAnalyser.ReadCsvFile(""));
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT, ex.exceptionType);
+        }
+
+        [Test]
         public void GivenCsvFilePath_WhenSortedOnState_ShouldReturnJson_AndCheckingFirstIndex()
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("asc", CensusAnalyserComparator.SortByField.STATE, US_CENSUS_FILE_PATH);

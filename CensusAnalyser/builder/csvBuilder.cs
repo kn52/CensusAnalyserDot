@@ -1,5 +1,6 @@
 ﻿using CensusAnalyser.exception;
 using CsvHelper;
+using System;
 using System.IO;
 
 namespace CensusAnalyser.builder
@@ -19,7 +20,11 @@ namespace CensusAnalyser.builder
             {
                 throw new CensusDataAnalyserException("File Not Found", CensusDataAnalyserException.ExceptionType.FILE_NOT_FOUND);
             }
-            
+            catch (ArgumentException ae)
+            {
+                throw new CensusDataAnalyserException("File Not Found", CensusDataAnalyserException.ExceptionType.FILE_NOT_FOUND);
+            }
+
             return csvData;
         }
         
