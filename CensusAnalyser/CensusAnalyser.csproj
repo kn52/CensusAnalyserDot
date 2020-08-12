@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CensusAnalyserDAO.cs" />
-    <Compile Include="comparator\CensusAnalyserCompartor.cs" />
+    <Compile Include="comparator\CensusAnalyserComparator.cs" />
     <Compile Include="CensusDataAnalyser.cs" />
     <Compile Include="builder\CsvBuilder.cs" />
     <Compile Include="factory\CensusAdaptor.cs" />

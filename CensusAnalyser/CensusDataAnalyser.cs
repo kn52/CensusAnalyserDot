@@ -5,6 +5,7 @@ using CensusAnalyser.pojo;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using CensusAnalyser.comparator;
 
 namespace CensusAnalyser
 {
@@ -25,10 +26,10 @@ namespace CensusAnalyser
             return numOfRecords.Count;
         }
 
-        public string GetIndiaStateSortedByName(params string[] CSV_FILE_PATH)
+        public string GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField sortByField, params string[] CSV_FILE_PATH)
         {
             Dictionary<string, CensusAnalyserDAO> csvData = ReadCsvFile(CSV_FILE_PATH);
-            CensusAnalyserCompartor censusComparator = new CensusAnalyserCompartor();
+            CensusAnalyserComparator censusComparator = new CensusAnalyserComparator(sortByField);
             var data = csvData.Select(x => x.Value).ToList();
             data.Sort(censusComparator);
             return JsonConvert.SerializeObject(data);
