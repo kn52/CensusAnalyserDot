@@ -9,9 +9,10 @@ namespace CensusAnalyserTest.test
 {
     class USCensusTest
     {
-        static readonly string testPath = "D:\\AAA\\VisualStudio\\CensusAnalyserSln\\CensusAnalyserTest";
-        private readonly string US_CENSUS_FILE_PATH = testPath + "\\csvfiles\\USCensusData.csv";
+        static readonly string testPath = "D:\\AAA\\VisualStudio\\CensusAnalyserSln\\CensusAnalyserTest\\";
+        private readonly string US_CENSUS_FILE_PATH = testPath + "csvfiles\\USCensusData.csv";
         private readonly string US_CENSUS_FILE_WRONG_PATH = testPath + "USCensusData.csv";
+        private readonly string US_CENSUS_WRONG_TYPE_FILE_PATH = testPath + "csvfiles\\USCensusData.type";
 
         CensusDataAnalyser censusDataAnalyser;
 
@@ -34,6 +35,14 @@ namespace CensusAnalyserTest.test
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(US_CENSUS_FILE_WRONG_PATH));
             Assert.AreEqual("File Not Found", ex.Message);
+        }
+
+        [Test]
+        public void GivenCSVFileType_WhenIncorrect_willthrowException()
+        {
+            var ex = Assert.Throws<CensusDataAnalyserException>(
+                () => censusDataAnalyser.ReadCsvFile(US_CENSUS_WRONG_TYPE_FILE_PATH));
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.FILE_NOT_FOUND, ex.exceptionType);
         }
 
         [Test]
