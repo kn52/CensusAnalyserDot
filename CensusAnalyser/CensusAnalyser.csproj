@@ -68,6 +68,7 @@
     <Compile Include="factory\IndiaCensusAdaptor.cs" />
     <Compile Include="pojo\IndiaStateCensusCsv.cs" />
     <Compile Include="pojo\IndiaStateCodeCsv.cs" />
+    <Compile Include="pojo\USCensusCsv.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

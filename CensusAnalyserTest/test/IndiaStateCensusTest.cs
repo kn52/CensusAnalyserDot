@@ -5,11 +5,11 @@ using CensusAnalyser.pojo;
 using Newtonsoft.Json;
 using CensusAnalyser.comparator;
 
-namespace CensusAnalyserTest
+namespace CensusAnalyserTest.test
 {
     class IndiaStateCensusTest
     {
-        static string testPath = "D:\\AAA\\VisualStudio\\CensusAnalyserSln\\CensusAnalyserTest\\";
+        static readonly string testPath = "D:\\AAA\\VisualStudio\\CensusAnalyserSln\\CensusAnalyserTest\\";
         private readonly string INDIA_CENSUS_FILE_PATH = testPath + "csvfiles\\IndiaStateCensusData.csv";
         private readonly string INDIA_CENSUS_FILE_WRONG_PATH = testPath + "IndiaStateCensusData.csv";
         private readonly string INDIA_CENSUS_WRONG_TYPE_FILE_PATH = testPath + "csvfiles\\IndiaStateCensusData.type";
