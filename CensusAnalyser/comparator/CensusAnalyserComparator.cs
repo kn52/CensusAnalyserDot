@@ -2,7 +2,7 @@
 
 namespace CensusAnalyser.comparator
 {
-    public class CensusAnalyserComparator : Comparer<CensusAnalyserDAO>
+    public class CensusAnalyserComparator : Comparer<CensusAnalyserDTO>
     {
         public enum SortByField
         {
@@ -19,7 +19,7 @@ namespace CensusAnalyser.comparator
         {
             compareByField = sortByField;
         }
-        public override int Compare(CensusAnalyserDAO x, CensusAnalyserDAO y)
+        public override int Compare(CensusAnalyserDTO x, CensusAnalyserDTO y)
         {
             switch (compareByField)
             {

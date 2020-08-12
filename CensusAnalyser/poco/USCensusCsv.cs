@@ -1,6 +1,6 @@
 ﻿using CsvHelper.Configuration.Attributes;
 
-namespace CensusAnalyser.pojo
+namespace CensusAnalyser.poco
 {
     public class USCensusCsv
     {

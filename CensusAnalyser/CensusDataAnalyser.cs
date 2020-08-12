@@ -4,10 +4,7 @@ using CensusAnalyser.factory;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
-using CsvHelper;
-using CensusAnalyser.builder;
-using CensusAnalyser.pojo;
+using CensusAnalyser.poco;
 
 namespace CensusAnalyser
 {
@@ -30,7 +27,7 @@ namespace CensusAnalyser
 
         public string GetIndiaStateSortedByField(string order,CensusAnalyserComparator.SortByField sortByField, params string[] CSV_FILE_PATH)
         {
-            Dictionary<string, CensusAnalyserDAO> csvData = ReadCsvFile(CSV_FILE_PATH);
+            Dictionary<string, CensusAnalyserDTO> csvData = ReadCsvFile(CSV_FILE_PATH);
             CensusAnalyserComparator censusComparator = new CensusAnalyserComparator(sortByField);
             var data = csvData.Select(x => x.Value).ToList();
             data.Sort(censusComparator);

@@ -67,9 +67,9 @@
     <Compile Include="builder\ICsvHelper.cs" />
     <Compile Include="factory\IndiaCensusAdaptor.cs" />
     <Compile Include="factory\USCensusAdatpor.cs" />
-    <Compile Include="pojo\IndiaStateCensusCsv.cs" />
-    <Compile Include="pojo\IndiaStateCodeCsv.cs" />
-    <Compile Include="pojo\USCensusCsv.cs" />
+    <Compile Include="poco\IndiaStateCensusCsv.cs" />
+    <Compile Include="poco\IndiaStateCodeCsv.cs" />
+    <Compile Include="poco\USCensusCsv.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

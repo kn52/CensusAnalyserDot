@@ -1,6 +1,6 @@
 ﻿using CensusAnalyser.builder;
 using CensusAnalyser.exception;
-using CensusAnalyser.pojo;
+using CensusAnalyser.poco;
 using CsvHelper;
 
 using System.Collections.Generic;
@@ -9,16 +9,16 @@ namespace CensusAnalyser.factory
 {
     class IndiaCensusAdaptor : CensusAdaptor
     {
-        public override Dictionary<string, CensusAnalyserDAO> ReadCensusFile(params string[] filePath)
+        public override Dictionary<string, CensusAnalyserDTO> ReadCensusFile(params string[] filePath)
         {
-            Dictionary<string, CensusAnalyserDAO> stateCensusList = new Dictionary<string, CensusAnalyserDAO>();
+            Dictionary<string, CensusAnalyserDTO> stateCensusList = new Dictionary<string, CensusAnalyserDTO>();
             stateCensusList = base.ReadCsvFile(filePath[0]);
             if (filePath.Length > 1)
                 ReadIndiaStateCodeFile(stateCensusList, filePath[1]);
             return stateCensusList;
         }
 
-        public int ReadIndiaStateCodeFile(Dictionary<string, CensusAnalyserDAO> stateCensusList,string filePath)
+        public int ReadIndiaStateCodeFile(Dictionary<string, CensusAnalyserDTO> stateCensusList,string filePath)
         {
             ICsvHelper csvHelper = new CsvBuilder();
             CsvReader csv = csvHelper.ReadFile(filePath);

@@ -1,6 +1,6 @@
 ﻿using CensusAnalyser.builder;
 using CensusAnalyser.exception;
-using CensusAnalyser.pojo;
+using CensusAnalyser.poco;
 using CsvHelper;
 using System.Collections.Generic;
 
@@ -8,11 +8,11 @@ namespace CensusAnalyser.factory
 {
     abstract class CensusAdaptor
     {
-        public abstract Dictionary<string, CensusAnalyserDAO> ReadCensusFile(params string[] filePath);
+        public abstract Dictionary<string, CensusAnalyserDTO> ReadCensusFile(params string[] filePath);
 
-        public  Dictionary<string, CensusAnalyserDAO> ReadCsvFile(string filePath)
+        public  Dictionary<string, CensusAnalyserDTO> ReadCsvFile(string filePath)
         {
-            Dictionary<string, CensusAnalyserDAO> stateCensusList = new Dictionary<string, CensusAnalyserDAO>();
+            Dictionary<string, CensusAnalyserDTO> stateCensusList = new Dictionary<string, CensusAnalyserDTO>();
             CsvReader csv = ReadIndiaFile(filePath);
             if (filePath.Contains("IndiaStateCensus"))
             {
@@ -21,7 +21,7 @@ namespace CensusAnalyser.factory
                     if (!csv.Context.Record[0].Contains("State") && filePath.Contains("IndiaStateCensusWrongHeader"))
                         HeaderException();
                     var record = csv.GetRecord<IndiaStateCensusCsv>();
-                    stateCensusList.Add(record.state, new CensusAnalyserDAO(record));
+                    stateCensusList.Add(record.state, new CensusAnalyserDTO(record));
                 }
             }
             if (filePath.Contains("USCensusData"))
@@ -31,7 +31,7 @@ namespace CensusAnalyser.factory
                     if (!csv.Context.Record[0].Equals("State Id") && filePath.Contains("USCensusWrongHeader"))
                         HeaderException();
                     var record = csv.GetRecord<USCensusCsv>();
-                    stateCensusList.Add(record.state, new CensusAnalyserDAO(record));
+                    stateCensusList.Add(record.state, new CensusAnalyserDTO(record));
                 }
             }
 

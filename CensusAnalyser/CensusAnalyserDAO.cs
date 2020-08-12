@@ -1,8 +1,8 @@
-﻿using CensusAnalyser.pojo;
+﻿using CensusAnalyser.poco;
 
 namespace CensusAnalyser
 {
-    public class CensusAnalyserDAO
+    public class CensusAnalyserDTO
     {
         public string state;
         public double population;
@@ -10,7 +10,7 @@ namespace CensusAnalyser
         public double totalDensity;
         public string stateCode;
 
-        public CensusAnalyserDAO(IndiaStateCensusCsv indiaStateCensusCsv)
+        public CensusAnalyserDTO(IndiaStateCensusCsv indiaStateCensusCsv)
         {
             state = indiaStateCensusCsv.state;
             population = indiaStateCensusCsv.population;
@@ -18,7 +18,7 @@ namespace CensusAnalyser
             totalDensity = indiaStateCensusCsv.densityPerSqKm;
         }
 
-        public CensusAnalyserDAO(USCensusCsv census)
+        public CensusAnalyserDTO(USCensusCsv census)
         {
             state = census.state;
             stateCode = census.stateCode;

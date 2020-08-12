@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using CensusAnalyser;
-using CensusAnalyser.pojo;
+using CensusAnalyser.poco;
 using CensusAnalyser.exception;
 using Newtonsoft.Json;
 using CensusAnalyser.comparator;
