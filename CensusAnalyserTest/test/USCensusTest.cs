@@ -13,6 +13,7 @@ namespace CensusAnalyserTest.test
         private readonly string US_CENSUS_FILE_PATH = testPath + "csvfiles\\USCensusData.csv";
         private readonly string US_CENSUS_FILE_WRONG_PATH = testPath + "USCensusData.csv";
         private readonly string US_CENSUS_WRONG_TYPE_FILE_PATH = testPath + "csvfiles\\USCensusData.type";
+        private readonly string US_CENSUS_WRONG_HEADER_FILE_PATH = testPath + "csvfiles\\USCensusWrongHeader.csv";
 
         CensusDataAnalyser censusDataAnalyser;
 
@@ -43,6 +44,14 @@ namespace CensusAnalyserTest.test
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(US_CENSUS_WRONG_TYPE_FILE_PATH));
             Assert.AreEqual(CensusDataAnalyserException.ExceptionType.FILE_NOT_FOUND, ex.exceptionType);
+        }
+
+        [Test]
+        public void GivenCSVFileHeader_WhenIncorrect_willthrowException()
+        {
+            var ex = Assert.Throws<CensusDataAnalyserException>(
+                () => censusDataAnalyser.ReadCsvFile(US_CENSUS_WRONG_HEADER_FILE_PATH));
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.WRONG_HEADER, ex.exceptionType);
         }
 
         [Test]

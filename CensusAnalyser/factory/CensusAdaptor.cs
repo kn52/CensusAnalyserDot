@@ -28,6 +28,8 @@ namespace CensusAnalyser.factory
             {
                 while (csv.Read())
                 {
+                    if (!csv.Context.Record[0].Equals("State Id") && filePath.Contains("USCensusWrongHeader"))
+                        HeaderException();
                     var record = csv.GetRecord<USCensusCsv>();
                     stateCensusList.Add(record.state, new CensusAnalyserDAO(record));
                 }
