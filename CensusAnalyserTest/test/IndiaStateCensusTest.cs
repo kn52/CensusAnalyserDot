@@ -78,5 +78,21 @@ namespace CensusAnalyserTest
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
             Assert.AreEqual("West Bengal", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
         }
+
+        [Test]
+        public void GivenCsvFilePath_WhenSortedOnPopulation_ShouldReturnJson_AndCheckingFirstIndex()
+        {
+            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.POPULATION, INDIA_CENSUS_FILE_PATH);
+            IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
+            Assert.AreEqual("Sikkim", indiaStateCensusCsv[0].state);
+        }
+
+        [Test]
+        public void GivenCsvFilePath_WhenSortedOnPopulation_ShouldReturnJson_AndCheckingLastIndex()
+        {
+            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.POPULATION, INDIA_CENSUS_FILE_PATH);
+            IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
+            Assert.AreEqual("Uttar Pradesh", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
+        }
     }
 }
