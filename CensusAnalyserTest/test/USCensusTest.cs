@@ -37,6 +37,22 @@ namespace CensusAnalyserTest.test
         }
 
         [Test]
+        public void GivenCsvFilePath_WhenSortedOnState_ShouldReturnJson_AndCheckingFirstIndex()
+        {
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("asc", CensusAnalyserComparator.SortByField.STATE, US_CENSUS_FILE_PATH);
+            USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
+            Assert.AreEqual("Alabama", uSCensusCsv[0].state);
+        }
+
+        [Test]
+        public void GivenCsvFilePath_WhenSortedOnState_ShouldReturnJson_AndCheckingLastIndex()
+        {
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("asc", CensusAnalyserComparator.SortByField.STATE, US_CENSUS_FILE_PATH);
+            USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
+            Assert.AreEqual("Wyoming", uSCensusCsv[uSCensusCsv.Length - 1].state);
+        }
+
+        [Test]
         public void GivenCsvFilePath_WhenSortedOnPopulation_ShouldReturnJson_AndCheckingFirstIndex()
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc", CensusAnalyserComparator.SortByField.POPULATION, US_CENSUS_FILE_PATH);
