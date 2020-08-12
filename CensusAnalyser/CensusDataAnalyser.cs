@@ -41,5 +41,13 @@ namespace CensusAnalyser
             return JsonConvert.SerializeObject(data);
         }
 
+        public string GetIndiaUSMostPopulatedState(IndiaStateCensusCsv indiaStateCensusCsv,USCensusCsv usCensusCsv)
+        {
+            string state = (indiaStateCensusCsv.densityPerSqKm > (usCensusCsv.totalArea/usCensusCsv.population))
+                ? indiaStateCensusCsv.state : usCensusCsv.state;
+
+            return state;
+        }
+
     }
 }
