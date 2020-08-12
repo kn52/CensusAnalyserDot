@@ -21,7 +21,7 @@ namespace CensusAnalyserTest.test
         [Test]
         public void GivenCSVFilePath_WhenCorrect_willReturnTotalCount()
         {
-            int count = censusDataAnalyser.ReadUSFile(US_CENSUS_FILE_PATH);
+            int count = censusDataAnalyser.GetFileRecordCount(US_CENSUS_FILE_PATH);
             Assert.AreEqual(51, count);
         }
 
@@ -29,7 +29,7 @@ namespace CensusAnalyserTest.test
         public void GivenCSVFilePath_WhenIncorrect_willthrowException()
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
-                () => censusDataAnalyser.ReadUSFile(US_CENSUS_FILE_WRONG_PATH));
+                () => censusDataAnalyser.ReadCsvFile(US_CENSUS_FILE_WRONG_PATH));
             Assert.AreEqual("File Not Found", ex.Message);
         }
     }

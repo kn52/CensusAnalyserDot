@@ -41,24 +41,5 @@ namespace CensusAnalyser
             return JsonConvert.SerializeObject(data);
         }
 
-        public int ReadUSFile(string CSV_FILE_PATH)
-        {
-            List<USCensusCsv> stateCensusList = new List<USCensusCsv>();
-            ICsvHelper csvHelper = new CsvBuilder();
-            CsvReader csv = csvHelper.ReadFile(CSV_FILE_PATH);
-            while (csv.Read())
-            {
-                if (!csv.Context.Record[0].Contains("State") && CSV_FILE_PATH.Contains("IndiaStateCensusWrongHeader"))
-                    HeaderException();
-                var record = csv.GetRecord<USCensusCsv>();
-                stateCensusList.Add(record);
-            }
-            return stateCensusList.Count;
-        }
-
-        static void HeaderException()
-        {
-            throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
-        }
     }
 }

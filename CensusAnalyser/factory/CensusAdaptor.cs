@@ -14,12 +14,23 @@ namespace CensusAnalyser.factory
         {
             Dictionary<string, CensusAnalyserDAO> stateCensusList = new Dictionary<string, CensusAnalyserDAO>();
             CsvReader csv = ReadIndiaFile(filePath);
-            while (csv.Read())
+            if (filePath.Contains("IndiaStateCensus"))
             {
-                if (!csv.Context.Record[0].Contains("State") && filePath.Contains("IndiaStateCensusWrongHeader"))
-                    HeaderException();
-                var record = csv.GetRecord<IndiaStateCensusCsv>();
-                stateCensusList.Add(record.state, new CensusAnalyserDAO(record));
+                while (csv.Read())
+                {
+                    if (!csv.Context.Record[0].Contains("State") && filePath.Contains("IndiaStateCensusWrongHeader"))
+                        HeaderException();
+                    var record = csv.GetRecord<IndiaStateCensusCsv>();
+                    stateCensusList.Add(record.state, new CensusAnalyserDAO(record));
+                }
+            }
+            if (filePath.Contains("USCensusData"))
+            {
+                while (csv.Read())
+                {
+                    var record = csv.GetRecord<USCensusCsv>();
+                    stateCensusList.Add(record.state, new CensusAnalyserDAO(record));
+                }
             }
 
             return stateCensusList;

@@ -1,9 +1,4 @@
 ﻿using CensusAnalyser.pojo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CensusAnalyser
 {
@@ -21,6 +16,15 @@ namespace CensusAnalyser
             population = indiaStateCensusCsv.population;
             totalArea = indiaStateCensusCsv.areaInSqKm;
             totalDensity = indiaStateCensusCsv.densityPerSqKm;
+        }
+
+        public CensusAnalyserDAO(USCensusCsv census)
+        {
+            state = census.state;
+            stateCode = census.stateId;
+            population = census.population;
+            totalArea = census.totalArea;
+            totalDensity = census.populationDensity;
         }
     }
 }
