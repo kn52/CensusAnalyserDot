@@ -66,7 +66,7 @@ namespace CensusAnalyserTest
         [Test]
         public void GivenCsvFilePath_WhenSortedOnName_ShouldReturnJson_AndCheckingFirstIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("asc",CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
             Assert.AreEqual("Andhra Pradesh", indiaStateCensusCsv[0].state);
         }
@@ -74,7 +74,7 @@ namespace CensusAnalyserTest
         [Test]
         public void GivenCsvFilePath_WhenSortedOnName_ShouldReturnJson_AndCheckingLastIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("asc",CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
             Assert.AreEqual("West Bengal", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
         }
@@ -82,49 +82,49 @@ namespace CensusAnalyserTest
         [Test]
         public void GivenCsvFilePath_WhenSortedOnPopulation_ShouldReturnJson_AndCheckingFirstIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.POPULATION, INDIA_CENSUS_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.POPULATION, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Sikkim", indiaStateCensusCsv[0].state);
+            Assert.AreEqual("Uttar Pradesh", indiaStateCensusCsv[0].state);
         }
 
         [Test]
         public void GivenCsvFilePath_WhenSortedOnPopulation_ShouldReturnJson_AndCheckingLastIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.POPULATION, INDIA_CENSUS_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.POPULATION, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Uttar Pradesh", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
+            Assert.AreEqual("Sikkim", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
         }
 
         [Test]
         public void GivenCsvFilePath_WhenSortedOnDensity_ShouldReturnJson_AndCheckingFirstIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.DENSITY, INDIA_CENSUS_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.DENSITY, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Arunachal Pradesh", indiaStateCensusCsv[0].state);
+            Assert.AreEqual("Bihar", indiaStateCensusCsv[0].state);
         }
 
         [Test]
         public void GivenCsvFilePath_WhenSortedOnDensity_ShouldReturnJson_AndCheckingLastIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.DENSITY, INDIA_CENSUS_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.DENSITY, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Bihar", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
+            Assert.AreEqual("Arunachal Pradesh", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
         }
 
         [Test]
         public void GivenCsvFilePath_WhenSortedOnArea_ShouldReturnJson_AndCheckingFirstIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.AREA, INDIA_CENSUS_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.AREA, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Goa", indiaStateCensusCsv[0].state);
+            Assert.AreEqual("Rajasthan", indiaStateCensusCsv[0].state);
         }
 
         [Test]
         public void GivenCsvFilePath_WhenSortedOnArea_ShouldReturnJson_AndCheckingLastIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.AREA, INDIA_CENSUS_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.AREA, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Rajasthan", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
+            Assert.AreEqual("Goa", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
         }
     }
 }

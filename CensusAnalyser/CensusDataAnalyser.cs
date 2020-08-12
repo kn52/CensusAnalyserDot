@@ -26,12 +26,16 @@ namespace CensusAnalyser
             return numOfRecords.Count;
         }
 
-        public string GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField sortByField, params string[] CSV_FILE_PATH)
+        public string GetIndiaStateSortedByField(string order,CensusAnalyserComparator.SortByField sortByField, params string[] CSV_FILE_PATH)
         {
             Dictionary<string, CensusAnalyserDAO> csvData = ReadCsvFile(CSV_FILE_PATH);
             CensusAnalyserComparator censusComparator = new CensusAnalyserComparator(sortByField);
             var data = csvData.Select(x => x.Value).ToList();
             data.Sort(censusComparator);
+            if (order.Equals("desc"))
+            {
+                data.Reverse();
+            }
             return JsonConvert.SerializeObject(data);
         }
     }

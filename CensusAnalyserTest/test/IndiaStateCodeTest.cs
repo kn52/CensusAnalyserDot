@@ -67,7 +67,7 @@ namespace CensusAnalyserTest
         [Test]
         public void GivenCsvFilePath_WhenSortedOnName_ShouldReturnJson_AndCheckingFirstIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH, INDIA_STATECODE_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("asc",CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH, INDIA_STATECODE_FILE_PATH);
             IndiaStateCodeCsv[] indiaStateCodeCsv = JsonConvert.DeserializeObject<IndiaStateCodeCsv[]>(json);
             Assert.AreEqual("AP", indiaStateCodeCsv[0].stateCode);
         }
@@ -75,7 +75,7 @@ namespace CensusAnalyserTest
         [Test]
         public void GivenCsvFilePath_WhenSortedOnName_ShouldReturnJson_AndCheckingLastIndex()
         {
-            string json = censusDataAnalyser.GetIndiaStateSortedByField(CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH, INDIA_STATECODE_FILE_PATH);
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("asc",CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH, INDIA_STATECODE_FILE_PATH);
             IndiaStateCodeCsv[] indiaStateCodeCsv = JsonConvert.DeserializeObject<IndiaStateCodeCsv[]>(json);
             Assert.AreEqual("WB", indiaStateCodeCsv[indiaStateCodeCsv.Length - 1].stateCode);
         }
