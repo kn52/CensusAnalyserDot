@@ -1,5 +1,8 @@
 ﻿using CensusAnalyser;
+using CensusAnalyser.comparator;
 using CensusAnalyser.exception;
+using CensusAnalyser.pojo;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace CensusAnalyserTest.test
@@ -31,6 +34,22 @@ namespace CensusAnalyserTest.test
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(US_CENSUS_FILE_WRONG_PATH));
             Assert.AreEqual("File Not Found", ex.Message);
+        }
+
+        [Test]
+        public void GivenCsvFilePath_WhenSortedOnPopulation_ShouldReturnJson_AndCheckingFirstIndex()
+        {
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("desc", CensusAnalyserComparator.SortByField.POPULATION, US_CENSUS_FILE_PATH);
+            USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
+            Assert.AreEqual("California", uSCensusCsv[0].state);
+        }
+
+        [Test]
+        public void GivenCsvFilePath_WhenSortedOnPopulation_ShouldReturnJson_AndCheckingLastIndex()
+        {
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("desc", CensusAnalyserComparator.SortByField.POPULATION, US_CENSUS_FILE_PATH);
+            USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
+            Assert.AreEqual("Wyoming", uSCensusCsv[uSCensusCsv.Length - 1].state);
         }
     }
 }
