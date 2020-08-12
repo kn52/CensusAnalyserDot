@@ -1,16 +1,11 @@
 ﻿using CsvHelper.Configuration.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CensusAnalyser.pojo
 {
     public class USCensusCsv
     {
         [Name("State Id")]
-        public string stateId { get; set; }
+        public string stateCode { get; set; }
 
         [Name("State")]
         public string state { get; set; }

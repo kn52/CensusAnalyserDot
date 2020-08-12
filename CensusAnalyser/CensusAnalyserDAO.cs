@@ -21,7 +21,7 @@ namespace CensusAnalyser
         public CensusAnalyserDAO(USCensusCsv census)
         {
             state = census.state;
-            stateCode = census.stateId;
+            stateCode = census.stateCode;
             population = census.population;
             totalArea = census.totalArea;
             totalDensity = census.populationDensity;

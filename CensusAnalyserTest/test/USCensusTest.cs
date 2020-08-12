@@ -67,5 +67,21 @@ namespace CensusAnalyserTest.test
             USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
             Assert.AreEqual("Wyoming", uSCensusCsv[uSCensusCsv.Length - 1].state);
         }
+
+        [Test]
+        public void GivenCsvFilePath_WhenSortedOnArea_ShouldReturnJson_AndCheckingFirstIndex()
+        {
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("desc", CensusAnalyserComparator.SortByField.AREA, US_CENSUS_FILE_PATH);
+            USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
+            Assert.AreEqual("Alaska", uSCensusCsv[0].state);
+        }
+
+        [Test]
+        public void GivenCsvFilePath_WhenSortedOnArea_ShouldReturnJson_AndCheckingLastIndex()
+        {
+            string json = censusDataAnalyser.GetIndiaStateSortedByField("desc", CensusAnalyserComparator.SortByField.AREA, US_CENSUS_FILE_PATH);
+            USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
+            Assert.AreEqual("District of Columbia", uSCensusCsv[uSCensusCsv.Length - 1].state);
+        }
     }
 }
