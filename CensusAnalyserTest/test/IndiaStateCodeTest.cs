@@ -44,7 +44,7 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_FILE_PATH, INDIA_STATECODE_WRONG_TYPE_FILE_PATH));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.FILE_NOT_FOUND, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE, ex.exceptionType);
         }
 
 

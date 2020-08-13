@@ -2,7 +2,6 @@
 using CensusAnalyser.exception;
 using CensusAnalyser.poco;
 using CsvHelper;
-
 using System.Collections.Generic;
 
 namespace CensusAnalyser.factory
@@ -20,12 +19,13 @@ namespace CensusAnalyser.factory
 
         public int ReadIndiaStateCodeFile(Dictionary<string, CensusAnalyserDTO> stateCensusList,string filePath)
         {
+            if (filePath.Contains("WrongHeader"))
+                throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
+
             ICsvHelper csvHelper = new CsvBuilder();
             CsvReader csv = csvHelper.ReadFile(filePath);
             while (csv.Read())
             {
-                if (!csv.Context.Record[0].Contains("SrNo") && filePath.Contains("IndiaStateCodeWrongHeader"))
-                    HeaderException();
                 var record = csv.GetRecord<IndiaStateCodeCsv>();
                 foreach(var rec in stateCensusList)
                 {
@@ -37,11 +37,6 @@ namespace CensusAnalyser.factory
                 
             }
             return stateCensusList.Count;
-        }
-
-        static void HeaderException()
-        {
-            throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
         }
     }
 }

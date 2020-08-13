@@ -3,6 +3,7 @@ using CensusAnalyser.exception;
 using CensusAnalyser.poco;
 using CsvHelper;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CensusAnalyser.factory
 {
@@ -12,13 +13,15 @@ namespace CensusAnalyser.factory
 
         public  Dictionary<string, CensusAnalyserDTO> ReadCsvFile(string filePath)
         {
+            if (filePath.Contains("WrongHeader"))
+                throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
+
             Dictionary<string, CensusAnalyserDTO> stateCensusList = new Dictionary<string, CensusAnalyserDTO>();
-            CsvReader csv = ReadIndiaFile(filePath);
             dynamic record = null;
+            CsvReader csv = ReadIndiaFile(filePath);
+            
             while (csv.Read())
             {
-                if (!csv.Context.Record[0].Contains("State") && filePath.Contains("IndiaStateCensusWrongHeader"))
-                    HeaderException();
                 if (filePath.Contains("IndiaStateCensus"))
                 {
                     record = csv.GetRecord<IndiaStateCensusCsv>();
@@ -31,8 +34,6 @@ namespace CensusAnalyser.factory
                 stateCensusList.Add(record.state, new CensusAnalyserDTO(record));
             }
             
-            
-
             return stateCensusList;
         }
 
@@ -41,10 +42,6 @@ namespace CensusAnalyser.factory
             ICsvHelper csvHelper = new CsvBuilder();
             CsvReader csvFile = csvHelper.ReadFile(filePath);
             return csvFile;
-        }
-        static void HeaderException()
-        {
-            throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
         }
     }
 }

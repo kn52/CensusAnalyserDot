@@ -43,7 +43,15 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(US_CENSUS_WRONG_TYPE_FILE_PATH));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.FILE_NOT_FOUND, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE, ex.exceptionType);
+        }
+
+        [Test]
+        public void GivenCSVFileHeader_WhenIncorrect_willthrowException()
+        {
+            var ex = Assert.Throws<CensusDataAnalyserException>(
+                () => censusDataAnalyser.ReadCsvFile(US_CENSUS_WRONG_HEADER_FILE_PATH));
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.WRONG_HEADER, ex.exceptionType);
         }
 
         [Test]
