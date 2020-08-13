@@ -14,26 +14,24 @@ namespace CensusAnalyser.factory
         {
             Dictionary<string, CensusAnalyserDTO> stateCensusList = new Dictionary<string, CensusAnalyserDTO>();
             CsvReader csv = ReadIndiaFile(filePath);
-            if (filePath.Contains("IndiaStateCensus"))
+            dynamic record = null;
+            while (csv.Read())
             {
-                while (csv.Read())
+                if (!csv.Context.Record[0].Contains("State") && filePath.Contains("IndiaStateCensusWrongHeader"))
+                    HeaderException();
+                if (filePath.Contains("IndiaStateCensus"))
                 {
-                    if (!csv.Context.Record[0].Contains("State") && filePath.Contains("IndiaStateCensusWrongHeader"))
-                        HeaderException();
-                    var record = csv.GetRecord<IndiaStateCensusCsv>();
-                    stateCensusList.Add(record.state, new CensusAnalyserDTO(record));
+                    record = csv.GetRecord<IndiaStateCensusCsv>();
                 }
-            }
-            if (filePath.Contains("USCensusData"))
-            {
-                while (csv.Read())
+                if (filePath.Contains("USCensusData"))
                 {
-                    if (!csv.Context.Record[0].Equals("State Id") && filePath.Contains("USCensusWrongHeader"))
-                        HeaderException();
-                    var record = csv.GetRecord<USCensusCsv>();
-                    stateCensusList.Add(record.state, new CensusAnalyserDTO(record));
+                    record = csv.GetRecord<USCensusCsv>();
                 }
+
+                stateCensusList.Add(record.state, new CensusAnalyserDTO(record));
             }
+            
+            
 
             return stateCensusList;
         }
@@ -48,6 +46,5 @@ namespace CensusAnalyser.factory
         {
             throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
         }
-
     }
 }

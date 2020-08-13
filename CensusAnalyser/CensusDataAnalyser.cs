@@ -40,11 +40,10 @@ namespace CensusAnalyser
 
         public string GetIndiaUSMostPopulatedState(IndiaStateCensusCsv indiaStateCensusCsv,USCensusCsv usCensusCsv)
         {
-            string state = (indiaStateCensusCsv.densityPerSqKm > (usCensusCsv.totalArea/usCensusCsv.population))
+            string state = (indiaStateCensusCsv.densityPerSqKm > (usCensusCsv.populationDensity))
                 ? indiaStateCensusCsv.state : usCensusCsv.state;
 
             return state;
         }
-
     }
 }
