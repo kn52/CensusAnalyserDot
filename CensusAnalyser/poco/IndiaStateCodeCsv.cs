@@ -1,20 +1,38 @@
-﻿using CsvHelper.Configuration.Attributes;
+﻿// <copyright file="IndiaStateCodeCsv.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace CensusAnalyser.poco
+namespace CensusAnalyser.Poco
 {
+    using CsvHelper.Configuration.Attributes;
+
+    /// <summary>
+    /// India state code poco class.
+    /// </summary>
     public class IndiaStateCodeCsv
     {
+        /// <summary>
+        /// Gets or sets serial number.
+        /// </summary>
         [Name("SrNo")]
-        public int srNo { get; set; }
+        public int SrNo { get; set; }
 
+        /// <summary>
+        /// Gets or sets state.
+        /// </summary>
         [Name("State Name")]
-        public string state { get; set; }
+        public string State { get; set; }
 
+        /// <summary>
+        /// Gets or sets pin.
+        /// </summary>
         [Name("TIN")]
-        public int pin { get; set; }
+        public int Pin { get; set; }
 
+        /// <summary>
+        /// Gets or sets state code.
+        /// </summary>
         [Name("StateCode")]
-        public string stateCode { get; set; }
-        
+        public string StateCode { get; set; }
     }
 }

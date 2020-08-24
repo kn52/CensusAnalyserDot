@@ -1,47 +1,21 @@
-﻿using CensusAnalyser.builder;
-using CensusAnalyser.exception;
-using CensusAnalyser.poco;
-using CsvHelper;
-using System.Collections.Generic;
-using System.Linq;
+﻿// <copyright file="CensusAdaptor.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace CensusAnalyser.factory
+namespace CensusAnalyser.Factory
 {
-    abstract class CensusAdaptor
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// Census Adaptor.
+    /// </summary>
+    public abstract class CensusAdaptor
     {
+        /// <summary>
+        /// Read file.
+        /// </summary>
+        /// <param name="filePath">Csv file path.</param>
+        /// <returns>Csv file in a map.</returns>
         public abstract Dictionary<string, CensusAnalyserDTO> ReadCensusFile(params string[] filePath);
-
-        public  Dictionary<string, CensusAnalyserDTO> ReadCsvFile(string filePath)
-        {
-            if (filePath.Contains("WrongHeader"))
-                throw new CensusDataAnalyserException("Wrong Header", CensusDataAnalyserException.ExceptionType.WRONG_HEADER);
-
-            Dictionary<string, CensusAnalyserDTO> stateCensusList = new Dictionary<string, CensusAnalyserDTO>();
-            dynamic record = null;
-            CsvReader csv = ReadIndiaFile(filePath);
-            
-            while (csv.Read())
-            {
-                if (filePath.Contains("IndiaStateCensus"))
-                {
-                    record = csv.GetRecord<IndiaStateCensusCsv>();
-                }
-                if (filePath.Contains("USCensusData"))
-                {
-                    record = csv.GetRecord<USCensusCsv>();
-                }
-
-                stateCensusList.Add(record.state, new CensusAnalyserDTO(record));
-            }
-            
-            return stateCensusList;
-        }
-
-        private CsvReader ReadIndiaFile(string filePath)
-        {
-            ICsvHelper csvHelper = new CsvBuilder();
-            CsvReader csvFile = csvHelper.ReadFile(filePath);
-            return csvFile;
-        }
     }
 }

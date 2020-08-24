@@ -1,12 +1,12 @@
-﻿using NUnit.Framework;
-using CensusAnalyser;
-using CensusAnalyser.poco;
-using CensusAnalyser.exception;
-using Newtonsoft.Json;
-using CensusAnalyser.comparator;
-
-namespace CensusAnalyserTest.test
+﻿namespace CensusAnalyserTest.test
 {
+    using CensusAnalyser;
+    using CensusAnalyser.Comparator;
+    using CensusAnalyser.Exception;
+    using CensusAnalyser.Poco;
+    using Newtonsoft.Json;
+    using NUnit.Framework;
+
     class IndiaStateCodeTest
     {
         static readonly string testPath = "D:\\AAA\\VisualStudio\\CensusAnalyserSln\\CensusAnalyserTest\\";
@@ -44,7 +44,7 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_FILE_PATH, INDIA_STATECODE_WRONG_TYPE_FILE_PATH));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE, ex.TypeException);
         }
 
 
@@ -53,7 +53,7 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_FILE_PATH, INDIA_STATECODE_WRONG_HEADER_FILE_PATH));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.WRONG_HEADER, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.WRONG_HEADER, ex.TypeException);
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile("", ""));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT, ex.TypeException);
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("asc",CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH, INDIA_STATECODE_FILE_PATH);
             IndiaStateCodeCsv[] indiaStateCodeCsv = JsonConvert.DeserializeObject<IndiaStateCodeCsv[]>(json);
-            Assert.AreEqual("AP", indiaStateCodeCsv[0].stateCode);
+            Assert.AreEqual("AP", indiaStateCodeCsv[0].StateCode);
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("asc",CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH, INDIA_STATECODE_FILE_PATH);
             IndiaStateCodeCsv[] indiaStateCodeCsv = JsonConvert.DeserializeObject<IndiaStateCodeCsv[]>(json);
-            Assert.AreEqual("WB", indiaStateCodeCsv[indiaStateCodeCsv.Length - 1].stateCode);
+            Assert.AreEqual("WB", indiaStateCodeCsv[indiaStateCodeCsv.Length - 1].StateCode);
         }
     }
 }

@@ -1,34 +1,68 @@
-﻿using CsvHelper.Configuration.Attributes;
+﻿// <copyright file="USCensusCsv.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace CensusAnalyser.poco
+namespace CensusAnalyser.Poco
 {
+    using CsvHelper.Configuration.Attributes;
+
+    /// <summary>
+    /// US census poco class.
+    /// </summary>
     public class USCensusCsv
     {
+        /// <summary>
+        /// Gets or sets state id.
+        /// </summary>
         [Name("State Id")]
-        public string stateCode { get; set; }
+        public string StateCode { get; set; }
 
+        /// <summary>
+        /// Gets or sets state.
+        /// </summary>
         [Name("State")]
-        public string state { get; set; }
+        public string State { get; set; }
 
+        /// <summary>
+        /// Gets or sets population.
+        /// </summary>
         [Name("Population")]
-        public double population { get; set; }
+        public double Population { get; set; }
 
+        /// <summary>
+        /// Gets or sets housing units.
+        /// </summary>
         [Name("Housing units")]
-        public double housingUnits { get; set; }
+        public double HousingUnits { get; set; }
 
+        /// <summary>
+        /// Gets or sets total area.
+        /// </summary>
         [Name("Total area")]
-        public double totalArea { get; set; }
+        public double TotalArea { get; set; }
 
+        /// <summary>
+        /// Gets or sets water area.
+        /// </summary>
         [Name("Water area")]
-        public double waterArea { get; set; }
+        public double WaterArea { get; set; }
 
+        /// <summary>
+        /// Gets or sets land Area.
+        /// </summary>
         [Name("Land area")]
-        public double landArea { get; set; }
+        public double LandArea { get; set; }
 
+        /// <summary>
+        /// Gets or sets population density.
+        /// </summary>
         [Name("Population Density")]
-        public double populationDensity { get; set; }
+        public double PopulationDensity { get; set; }
 
+        /// <summary>
+        /// Gets or sets housing density.
+        /// </summary>
         [Name("Housing Density")]
-        public double housingDensity { get; set; }
+        public double HousingDensity { get; set; }
     }
 }

@@ -1,12 +1,12 @@
-﻿using CensusAnalyser;
-using CensusAnalyser.comparator;
-using CensusAnalyser.exception;
-using CensusAnalyser.poco;
-using Newtonsoft.Json;
-using NUnit.Framework;
-
-namespace CensusAnalyserTest.test
+﻿namespace CensusAnalyserTest.test
 {
+    using CensusAnalyser;
+    using CensusAnalyser.Comparator;
+    using CensusAnalyser.Exception;
+    using CensusAnalyser.Poco;
+    using Newtonsoft.Json;
+    using NUnit.Framework;
+
     class USCensusTest
     {
         static readonly string testPath = "D:\\AAA\\VisualStudio\\CensusAnalyserSln\\CensusAnalyserTest\\";
@@ -43,7 +43,7 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(US_CENSUS_WRONG_TYPE_FILE_PATH));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE, ex.TypeException);
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(US_CENSUS_WRONG_HEADER_FILE_PATH));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.WRONG_HEADER, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.WRONG_HEADER, ex.TypeException);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(""));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT, ex.TypeException);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("asc", CensusAnalyserComparator.SortByField.STATE, US_CENSUS_FILE_PATH);
             USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
-            Assert.AreEqual("Alabama", uSCensusCsv[0].state);
+            Assert.AreEqual("Alabama", uSCensusCsv[0].State);
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("asc", CensusAnalyserComparator.SortByField.STATE, US_CENSUS_FILE_PATH);
             USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
-            Assert.AreEqual("Wyoming", uSCensusCsv[uSCensusCsv.Length - 1].state);
+            Assert.AreEqual("Wyoming", uSCensusCsv[uSCensusCsv.Length - 1].State);
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc", CensusAnalyserComparator.SortByField.POPULATION, US_CENSUS_FILE_PATH);
             USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
-            Assert.AreEqual("California", uSCensusCsv[0].state);
+            Assert.AreEqual("California", uSCensusCsv[0].State);
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc", CensusAnalyserComparator.SortByField.POPULATION, US_CENSUS_FILE_PATH);
             USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
-            Assert.AreEqual("Wyoming", uSCensusCsv[uSCensusCsv.Length - 1].state);
+            Assert.AreEqual("Wyoming", uSCensusCsv[uSCensusCsv.Length - 1].State);
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc", CensusAnalyserComparator.SortByField.AREA, US_CENSUS_FILE_PATH);
             USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
-            Assert.AreEqual("Alaska", uSCensusCsv[0].state);
+            Assert.AreEqual("Alaska", uSCensusCsv[0].State);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc", CensusAnalyserComparator.SortByField.AREA, US_CENSUS_FILE_PATH);
             USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
-            Assert.AreEqual("District of Columbia", uSCensusCsv[uSCensusCsv.Length - 1].state);
+            Assert.AreEqual("District of Columbia", uSCensusCsv[uSCensusCsv.Length - 1].State);
         }
 
         [Test]
@@ -115,7 +115,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("asc", CensusAnalyserComparator.SortByField.STATE_CODE, US_CENSUS_FILE_PATH);
             USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
-            Assert.AreEqual("AK", uSCensusCsv[0].stateCode);
+            Assert.AreEqual("AK", uSCensusCsv[0].StateCode);
         }
 
         [Test]
@@ -123,7 +123,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("asc", CensusAnalyserComparator.SortByField.STATE_CODE, US_CENSUS_FILE_PATH);
             USCensusCsv[] uSCensusCsv = JsonConvert.DeserializeObject<USCensusCsv[]>(json);
-            Assert.AreEqual("WY", uSCensusCsv[uSCensusCsv.Length - 1].stateCode);
+            Assert.AreEqual("WY", uSCensusCsv[uSCensusCsv.Length - 1].StateCode);
         }
     }
 }

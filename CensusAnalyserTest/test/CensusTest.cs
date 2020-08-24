@@ -1,11 +1,10 @@
-﻿using CensusAnalyser;
-using CensusAnalyser.comparator;
-using CensusAnalyser.poco;
-using Newtonsoft.Json;
-using NUnit.Framework;
-
-namespace CensusAnalyserTest.test
+﻿namespace CensusAnalyserTest.test
 {
+    using CensusAnalyser;
+    using CensusAnalyser.Comparator;
+    using CensusAnalyser.Poco;
+    using Newtonsoft.Json;
+    using NUnit.Framework;
     class CensusTest
     {
         static readonly string testPath = "D:\\AAA\\VisualStudio\\CensusAnalyserSln\\CensusAnalyserTest\\";

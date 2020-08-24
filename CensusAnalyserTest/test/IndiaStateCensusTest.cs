@@ -1,12 +1,12 @@
-﻿using NUnit.Framework;
-using CensusAnalyser;
-using CensusAnalyser.exception;
-using CensusAnalyser.poco;
-using Newtonsoft.Json;
-using CensusAnalyser.comparator;
-
-namespace CensusAnalyserTest.test
+﻿namespace CensusAnalyserTest.test
 {
+    using CensusAnalyser;
+    using CensusAnalyser.Comparator;
+    using CensusAnalyser.Exception;
+    using CensusAnalyser.Poco;
+    using Newtonsoft.Json;
+    using NUnit.Framework;
+
     class IndiaStateCensusTest
     {
         static readonly string testPath = "D:\\AAA\\VisualStudio\\CensusAnalyserSln\\CensusAnalyserTest\\";
@@ -43,7 +43,7 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_WRONG_TYPE_FILE_PATH));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_FILE_TYPE, ex.TypeException);
         }
 
 
@@ -52,7 +52,7 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(INDIA_CENSUS_WRONG_HEADER_FILE_PATH));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.WRONG_HEADER, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.WRONG_HEADER, ex.TypeException);
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace CensusAnalyserTest.test
         {
             var ex = Assert.Throws<CensusDataAnalyserException>(
                 () => censusDataAnalyser.ReadCsvFile(""));
-            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT, ex.exceptionType);
+            Assert.AreEqual(CensusDataAnalyserException.ExceptionType.INVALID_ARGUMENT, ex.TypeException);
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("asc",CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Andhra Pradesh", indiaStateCensusCsv[0].state);
+            Assert.AreEqual("Andhra Pradesh", indiaStateCensusCsv[0].State);
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("asc",CensusAnalyserComparator.SortByField.STATE,INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("West Bengal", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
+            Assert.AreEqual("West Bengal", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].State);
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.POPULATION, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Uttar Pradesh", indiaStateCensusCsv[0].state);
+            Assert.AreEqual("Uttar Pradesh", indiaStateCensusCsv[0].State);
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.POPULATION, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Sikkim", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
+            Assert.AreEqual("Sikkim", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].State);
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.DENSITY, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Bihar", indiaStateCensusCsv[0].state);
+            Assert.AreEqual("Bihar", indiaStateCensusCsv[0].State);
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.DENSITY, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Arunachal Pradesh", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
+            Assert.AreEqual("Arunachal Pradesh", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].State);
         }
 
         [Test]
@@ -116,7 +116,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.AREA, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Rajasthan", indiaStateCensusCsv[0].state);
+            Assert.AreEqual("Rajasthan", indiaStateCensusCsv[0].State);
         }
 
         [Test]
@@ -124,7 +124,7 @@ namespace CensusAnalyserTest.test
         {
             string json = censusDataAnalyser.GetIndiaStateSortedByField("desc",CensusAnalyserComparator.SortByField.AREA, INDIA_CENSUS_FILE_PATH);
             IndiaStateCensusCsv[] indiaStateCensusCsv = JsonConvert.DeserializeObject<IndiaStateCensusCsv[]>(json);
-            Assert.AreEqual("Goa", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].state);
+            Assert.AreEqual("Goa", indiaStateCensusCsv[indiaStateCensusCsv.Length - 1].State);
         }
     }
 }

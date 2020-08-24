@@ -1,18 +1,62 @@
-﻿using System;
+﻿// <copyright file="CensusDataAnalyserException.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace CensusAnalyser.exception
+namespace CensusAnalyser.Exception
 {
-    public class CensusDataAnalyserException: Exception
+    using System;
+
+    /// <summary>
+    /// Census Analyser Exception.
+    /// </summary>
+    public class CensusDataAnalyserException : Exception
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CensusDataAnalyserException"/> class.
+        /// Exception.
+        /// </summary>
+        /// <param name="message">Custom message.</param>
+        /// <param name="exceptionType">Exception type.</param>
+        public CensusDataAnalyserException(string message, ExceptionType exceptionType)
+            : base(string.Format(message))
+        {
+            this.TypeException = exceptionType;
+        }
+
+        /// <summary>
+        /// Exception Type.
+        /// </summary>
         public enum ExceptionType
         {
-            INVALID_ARGUMENT,  FILE_NOT_FOUND, WRONG_HEADER, INVALID_FILE_TYPE, ERROR
+            /// <summary>
+            /// Invalid argument.
+            /// </summary>
+            INVALID_ARGUMENT,
+
+            /// <summary>
+            /// File not found.
+            /// </summary>
+            FILE_NOT_FOUND,
+
+            /// <summary>
+            /// Wrong header.
+            /// </summary>
+            WRONG_HEADER,
+
+            /// <summary>
+            /// Invalid file type.
+            /// </summary>
+            INVALID_FILE_TYPE,
+
+            /// <summary>
+            /// Error.
+            /// </summary>
+            ERROR,
         }
 
-        public ExceptionType exceptionType;
-        public CensusDataAnalyserException(string message, ExceptionType exceptionType) : base(String.Format(message))
-        {
-            this.exceptionType = exceptionType;
-        }
+        /// <summary>
+        /// Gets or sets type exception.
+        /// </summary>
+        public ExceptionType TypeException { get; set; }
     }
 }
